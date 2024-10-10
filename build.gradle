@@ -1,0 +1,51 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'net.serenity-bdd.serenity-gradle-plugin'
+
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2"
+        }
+    }
+    dependencies {
+
+        classpath("net.serenity-bdd:serenity-gradle-plugin:4.1.14")
+    }
+}
+
+
+dependencies {
+
+    implementation 'net.serenity-bdd:serenity-junit:4.0.12'
+    implementation 'net.serenity-bdd:serenity-cucumber:4.0.12'
+    implementation 'net.serenity-bdd:serenity-core:4.0.12'
+    implementation 'net.serenity-bdd:serenity-screenplay:4.0.12'
+    implementation 'net.serenity-bdd:serenity-screenplay-webdriver:4.0.12'
+    implementation 'io.github.bonigarcia:webdrivermanager:5.8.0'
+}
+
+
+test {
+
+    ignoreFailures = true
+}
+
+compileJava {
+    options.release=17
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+
+gradle.startParameter.continueOnFailure = true
